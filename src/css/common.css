@@ -10,6 +10,7 @@ body {
   background-color: #fafafa;
   color: #212121;
   line-height: 1.5;
+  position: relative;
 }
 
 img {
@@ -17,3 +18,49 @@ img {
   max-width: 100%;
 }
 
+button.start-btn, button.stop-btn {
+position: absolute;
+top: 500%;
+font-size: large;
+border-radius: 5px;
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;;
+border: 0;
+}
+
+.start-btn {
+left: 46%;
+}
+
+.stop-btn {
+  left: 51%;
+  }
+
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.timer {
+display: flex;
+gap: 20px;
+padding-top: 20px;
+
+}
+
+.label {
+text-transform: uppercase;
+font-size: x-small;
+font-stretch: 50%;
+text-align: center;
+font-variant: normal;
+
+}
+
+.value {
+  font-weight: 500;
+  text-align: center;
+  font-size: xx-large;
+  line-height: 30px;
+}
