@@ -29,7 +29,7 @@ const options = {
     console.log(selectedDates[0]);
   },
 };
-const flatpickr = flatpickr('#datetime-picker', options);
+const flatpickr = flatpickr('input#datetime-picker', options);
 
 
 function convertMs(ms) {
