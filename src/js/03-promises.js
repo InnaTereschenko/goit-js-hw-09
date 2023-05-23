@@ -26,20 +26,29 @@ function createPromise(position, delay) {
 
 refs.form.addEventListener('submit', evt => {
   evt.preventDefault();
-  
+  let promises = [];
   let firstDelay = Number(refs.inputDelay.value);
   let stepDelay = Number(refs.inputStep.value);
-  for (let i = 0; i < refs.inputAmount.value; i ++) {
+  let amountPromises = Number(refs.inputAmount.value);
+  for (let i = 0; i < amountPromises; i ++) {
+    promises.push(
+      createPromise(i + 1, firstDelay + i * stepDelay)
+        .then(({ position, delay }) => {
+          Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+          refs.btnCreat.disabled = true;
+        })
+        .catch(({ position, delay }) => {
+          Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+        })
+    );
     
-  createPromise(i + 1, firstDelay + i * stepDelay)
-  .then(({ position, delay }) => {
-    Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
-  })
-  .catch(({ position, delay }) => {
-    Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-  });
-    console.log(firstDelay);
-    
-}
+  }
+ Promise.all(promises)
+    .finally(() => {
+      refs.btnCreat.disabled = false; 
+      Notiflix.Notify.success(`${amountPromises} promises were created`);
+      refs.form.reset();
+    });
+  
   });
 

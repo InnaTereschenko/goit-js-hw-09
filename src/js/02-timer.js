@@ -31,7 +31,6 @@ const options = {
 };
 flatpickr('input#datetime-picker', options);
 
-
 function convertMs(ms) {
   const second = 1000;
   const minute = second * 60;
@@ -42,10 +41,10 @@ function convertMs(ms) {
   const hours = addLeadingZero(Math.floor((ms % day) / hour));
   const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
   const seconds = addLeadingZero(
-      Math.floor((((ms % day) % hour) % minute) / second)
-    );
+    Math.floor((((ms % day) % hour) % minute) / second)
+  );
 
-    return { days, hours, minutes, seconds };
+  return { days, hours, minutes, seconds };
 }
 
 function addLeadingZero(value) {
@@ -54,33 +53,21 @@ function addLeadingZero(value) {
 
 refs.buttonStart.addEventListener('click', () => {
   let timer = setInterval(() => {
+
     const currentTime = Date.now();
     const deltaTime = new Date(refs.input.value) - currentTime;
-      
+    refs.input.disabled = true;
     refs.buttonStart.disabled = true;
-if(deltaTime >= 0) {
+
+    if (deltaTime >= 0) {
       let timeObject = convertMs(deltaTime);
-  refs.days.textContent = timeObject.days;
-  refs.hours.textContent = timeObject.hours;
-  refs.minutes.textContent = timeObject.minutes;
-  refs.seconds.textContent = timeObject.seconds;
-  return;
-  };
+      refs.days.textContent = timeObject.days;
+      refs.hours.textContent = timeObject.hours;
+      refs.minutes.textContent = timeObject.minutes;
+      refs.seconds.textContent = timeObject.seconds;
+      return;
+    }
     clearInterval(timer);
-Notiflix.Notify.success('Countdown is over');
-    }, 1000);
-  
+    Notiflix.Notify.success('Countdown is over');
+  }, 1000);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
